@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Pankaj Narula - Home</title>
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+<nav>
+  <!-- Hamburger icon for mobile -->
+  <div class="hamburger">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+
+  <ul class="menu">
+    <li><a href="index.html">Home</a></li>
+
+    <li class="dropdown">
+      <a href="#" class="courses-link">Courses <span class="arrow">▶</span></a>
+      <ul class="dropdown-content">
+        <li><a href="calculus.html" target="_blank">Calculus For Engineers</a></li>
+        <li><a href="diff_eqn.html" target="_blank">Differential Equation and Linear Algebra</a></li>
+        <li><a href="numerical.html" target="_blank">Numerical Linear Algebra</a></li>
+        <li><a href="optimization.html" target="_blank">Optimization Techniques</a></li>
+        <li><a href="probability.html" target="_blank">Probability and Statistics</a></li>
+      </ul>
+    </li>
+
+    <li><a href="research.html" target="_blank">Research</a></li>
+
+    <li class="dropdown">
+      <a href="#" class="new-dropdown-link">Notes and Ideas <span class="arrow">▶</span></a>
+      <ul class="dropdown-content">
+        <li><a href="teachingReflections.html" target="_blank">Teaching and Reflections</a></li>
+        <li><a href="explainers.html" target="_blank">Explainer</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+<div class="container">
+  <div class="content">
+    <h1>Welcome</h1>
+    <div class="construction-banner">
+      <p>This website is under construction. Content is being updated regularly. Stay tuned!</p>
+    </div>
+
+    <h2 id="name">Dr. Pankaj Narula</h2>
+
+    <div class="info-sections">
+      <div id="about">
+        <h2>Contact</h2>
+        <h3>Dr. Pankaj Narula</h3>
+        <h3>Assistant Professor, Department of Mathematics</h3>
+        <h3>Thapar Institute of Engineering and Technology</h3>
+        <h3>Patiala, Punjab, 147004</h3>
+        <h3>Email: <a href="mailto:mailbox@pankajnarula.com">mailbox@pankajnarula.com</a></h3>
+      </div>
+
+      <div id="updated-news">
+        <h2>Announcements</h2>
+        <div class="news-container">
+          <ul id="news-list">
+            <!-- dummy news  -->
+            <!-- write in this format YYYY-MM-DD -->
+            <li data-date="2025-01-05" data-time="14:30">Semester results declared. Students can now check their grades for all courses on the student portal. Please contact the department office for any discrepancies.</li>
+            <li data-date="2025-01-10" data-time="1:30">Workshop on AI - Register now. A week-long intensive workshop on Artificial Intelligence, covering machine learning, neural networks, and real-world applications. Limited seats available.</li>
+            <li data-date="2025-12-28" data-time="18:30">Holiday on Dec 25. The institute will remain closed on account of Christmas. All administrative and academic offices will resume the following day.</li>
+            <li data-date="2025-02-15" data-time="10:30">New Research Paper Published. Dr. Pankaj Narula and his team have published a paper on advanced topological methods in algebra, which has been accepted in the International Journal of Mathematics.</li>
+            <li data-date="2025-03-01" data-time="14:30">Guest Lecture: Quantum Computing. A renowned expert will give a lecture on Quantum Computing and its applications in modern technology. Open for all students and faculty.</li>
+            <li data-date="2025-03-10" data-time="14:30">Mathematics Olympiad Registration. Students are invited to register for the upcoming state-level Mathematics Olympiad. Winners will receive certificates and prizes.</li>
+            <li data-date="2025-04-05" data-time="16:30">Department Maintenance Notice. The Mathematics Department will undergo routine maintenance from 9 AM to 5 PM. Some labs and offices may be temporarily inaccessible.</li>
+            <li data-date="2025-04-20" data-time="14:30">Scholarship Opportunities. Several scholarships are now open for undergraduate and postgraduate students based on academic excellence and research contributions. Check the student portal for details.</li>
+            <li data-date="2025-05-01" data-time="14:30">Online Course Enrollment. Enrollment for online courses on Data Science, Machine Learning, and Applied Mathematics is now open. Seats are limited, so register early to secure your spot.</li>
+            <li data-date="2025-05-15" data-time="18:30">Alumni Meetup. The Mathematics Department will host its annual alumni meetup. Former students are encouraged to join for networking, talks, and dinner.</li>
+            <li data-date="2025-06-01" data-time="14:30">Summer Research Internship. Applications are open for the summer research internship program. Students will get hands-on experience with ongoing faculty research projects.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Footer -->
+<footer>
+  <div class="footer-container">
+    <a href="mailto:mailbox@pankajnarula.com" title="Email">
+      <i class="fas fa-envelope"></i>
+    </a>
+    <!-- <a href="https://github.com/username" target="_blank" title="GitHub">
+      <i class="fab fa-github"></i>
+    </a> -->
+    <a href="https://www.youtube.com/@pankajnarula9273" target="_blank" title="YouTube">
+      <i class="fab fa-youtube"></i>
+    </a>
+
+    <a href="https://www.linkedin.com/in/dr-pankaj-narula-5aa9a7199/" target="_blank" title="LinkedIn">
+      <i class="fab fa-linkedin"></i>
+    </a>
+  </div>
+</footer>
+
+<script src="announcements.js"></script>
+
+<script>
+const hamburger = document.querySelector('.hamburger');
+const menu = document.querySelector('.menu');
+
+hamburger.addEventListener('click', () => {
+  menu.classList.toggle('active');
+});
+</script>
+
+</body>
+</html>

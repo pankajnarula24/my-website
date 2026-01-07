@@ -1,0 +1,635 @@
+/* GLOBAL */
+body {
+  font-family: 'Times New Roman', Times, serif;
+  margin: 0;
+  background-color: #F5F5DC;
+}
+
+.container {
+  display: flex;
+  min-height: 100vh;
+}
+
+.sidebar {
+  width: 220px;
+  background: #003366;
+  padding: 20px;
+  color: white;
+}
+
+.sidebar a {
+  color: white;
+  display: block;
+  margin: 10px 0;
+  text-decoration: none;
+}
+
+.content {
+  flex: 1;
+  padding: 40px;
+}
+
+/* HEADINGS */
+h1 {
+  font-size: 80px;
+  text-align: center;
+  color: #1f2f46;
+  margin-top: 0;
+}
+
+.content h1 {
+  margin-bottom: 5px;
+  margin-top: 10px;
+}
+
+#name {
+  font-size: 38px;
+  margin: 0 0 50px 0;
+  text-align: center;
+  color: #1f2f46;
+}
+
+/* INFO SECTIONS */
+.info-sections {
+  display: flex;
+  flex-direction: row;
+  gap: 80px;
+}
+
+#about,
+#updated-news {
+  flex: 1;
+  height: 220px;
+  padding: 20px;
+  border-radius: 20px;
+}
+
+#about {
+  background-color: #1f2f46;
+  color: white;
+  width: 500px;
+}
+
+#updated-news {
+  background-color: #FEED95;
+  color: #1f2f46;
+  width: 500px;
+}
+
+#about h2,
+#updated-news h2 {
+  margin-top: 5px;
+}
+
+#about h3 {
+  margin: 10px 0;
+}
+
+#about a {
+  color: white;
+  text-decoration: none;
+}
+
+#about a:hover {
+  text-decoration: underline;
+}
+
+.indent {
+  margin-left: 80px;
+}
+
+/* NAVBAR */
+nav {
+  position: sticky;
+  top: 0;
+  z-index: 2000;
+  background-color: #FEED95;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.15);
+}
+
+.menu {
+  list-style: none;
+  margin: 0;
+  padding: 6px 20px;
+  background-color: #FEED95;
+  text-align: right;
+}
+
+.menu li {
+  display: inline-block;
+  position: relative;
+}
+
+.menu li a {
+  display: block;
+  color: #1f2f46;
+  text-align: center;
+  padding: 10px 20px;   
+  font-size: 19px;
+  font-weight: bold;
+  text-decoration: none;
+  border-radius: 10px;
+  position: relative;
+  transition: background-color 0.25s ease, transform 0.2s ease;
+}
+
+.menu li a:hover {
+  background-color: rgba(31,47,70,0.12);
+  transform: translateY(-1px);
+}
+
+.menu li a::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 4px;
+  width: 0;
+  height: 2px;
+  background-color: #1f2f46;
+  transition: all 0.3s ease;
+}
+
+.menu li a:hover::after {
+  width: 70%;
+  left: 15%;
+}
+
+.menu li a:active {
+  border: 3px solid #1f2f46;
+}
+
+
+
+
+
+/* GLOBAL and previous styles remain unchanged */
+
+/* -------------------- HAMBURGER MENU -------------------- */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+  padding: 10px;
+  gap: 4px;
+}
+
+.hamburger span {
+  width: 25px;
+  height: 3px;
+  background-color: #1f2f46;
+  transition: all 0.3s ease;
+}
+
+/* -------------------- RESPONSIVE NAVBAR -------------------- */
+@media (max-width: 900px) {
+
+  .hamburger {
+    display: flex; /* Show hamburger */
+  }
+
+  .menu {
+    display: none; /* Hide menu by default on mobile */
+    flex-direction: column;
+    width: 100%;
+    text-align: left;
+    padding-left: 0;
+  }
+
+  .menu.active {
+    display: flex; /* Show menu when hamburger is clicked */
+  }
+
+  .menu li {
+    display: block;
+    width: 100%;
+  }
+
+  .menu li a {
+    padding: 12px 16px;
+    font-size: 18px;
+  }
+
+  .dropdown-content {
+    position: static; /* Show dropdown normally under parent */
+    box-shadow: none;
+    padding-left: 20px;
+  }
+
+  .dropdown .arrow {
+    display: none; /* Hide arrows on mobile */
+  }
+}
+
+/* Optional smaller devices adjustments */
+@media (max-width: 600px) {
+  .menu li a {
+    font-size: 16px;
+    padding: 10px 14px;
+  }
+}
+
+/* DROPDOWN MENU */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #FEED95;
+  min-width: 180px;
+  z-index: 1000;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+  padding: 6px 0;
+  text-align: left;
+}
+
+.dropdown-content li {
+  display: block;
+}
+
+.dropdown-content li a {
+  padding: 8px 14px;
+  font-size: 16px;
+  margin-left: 0;
+}
+
+.dropdown-content li a:hover {
+  background-color: rgba(31,47,70,0.12);
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.arrow {
+  display: inline-block;
+  margin-left: 6px;
+  font-size: 12px;
+  color: #1f2f46;
+  transition: transform 0.3s ease;
+}
+
+.dropdown:hover .arrow {
+  transform: rotate(90deg);
+}
+
+/* ANNOUNCEMENTS */
+.news-container {
+  height: 150px;
+  overflow: hidden;
+  position: relative;
+}
+
+#news-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  max-height: 150px; 
+  overflow-y: auto;    
+  overflow-x: hidden;
+
+  /* Firefox */
+  scrollbar-width: thin;
+  scrollbar-color: #d4b200 #FEED95; 
+}
+
+/* Chrome, Edge, Safari */
+#news-list::-webkit-scrollbar {
+  width: 8px;
+}
+
+#news-list::-webkit-scrollbar-track {
+  background: #FEED95;  
+  border-radius: 10px;
+}
+
+#news-list::-webkit-scrollbar-thumb {
+  background-color: #d4b200; 
+  border-radius: 10px;
+  border: 2px solid #FEED95; 
+}
+
+#news-list::-webkit-scrollbar-thumb:hover {
+  background-color: #b89a00; 
+}
+
+#news-list li {
+  display: block;
+  padding: 6px 20px 6px 6px;
+  font-size: 16px;
+  text-align: left;
+}
+
+.news-item {
+  display: block;
+  margin-bottom: 10px;
+}
+
+.news-header {
+  display: flex;
+  justify-content: space-between;
+  font-weight: bold;
+  margin-bottom: 2px;
+  flex-wrap: wrap;
+  color: #1f2f46;
+}
+
+.news-text {
+  margin-top: 5px;
+  line-height: 1.5;
+  word-wrap: break-word;
+  white-space: normal;
+}
+
+.news-date {
+  font-weight: bold;
+}
+
+.news-time {
+  font-style: italic;
+}
+
+.news-item.recent .news-text {
+  color: red;
+  font-weight: bold;
+}
+
+.news-item.recent .news-text::before {
+  content: "⭐ ";
+  font-size: 18px;
+}
+
+/* NEW ANNOUNCEMENT BADGE */
+.new-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: -12px;
+  margin-left: 6px;
+  padding: 2px 2px;
+  font-size: 16px;
+  font-weight: bold;
+  color: red;     
+  background: none;    
+  position: sticky;
+  top: 0;
+  animation: blink 1s infinite;
+}
+
+.new-badge::before {
+  content: "💥";
+  font-size: 22px;
+}
+
+@keyframes blink {
+  0%, 50%, 100% { opacity: 1; }
+  25%, 75% { opacity: 0; }
+}
+
+/* CONSTRUCTION BANNER */
+.construction-banner {
+  width: 100%;
+  background-color: #1f2f46;
+  overflow: hidden;
+  white-space: nowrap;
+  box-sizing: border-box;
+  padding: 0px 0;
+  margin: 10px 0;
+  border-radius: 4px;
+}
+
+.construction-banner p {
+  display: inline-block;
+  color: #FFD700; 
+  font-weight: bold;
+  font-size: 12px;
+  padding-left: 100%; 
+  animation: scroll-text 15s linear infinite;
+}
+
+@keyframes scroll-text {
+  0% { transform: translateX(0%); }
+  100% { transform: translateX(-100%); }
+}
+
+/* COURSE / CALCULUS PAGE (same for all courses) */
+#calc-heading {
+  font-size: 42px;
+  text-align: center;
+  color: #1f2f46;
+  margin: 0 0 28px 0;
+  position: relative;
+}
+
+#calc-heading::after {
+  content: "";
+  display: block;
+  width: 160px;
+  height: 3px;
+  background-color: #1f2f46;
+  margin: 12px auto 0;
+  border-radius: 2px;
+}
+
+#calc-para,
+#calc-para1 {
+  font-size: 17px;
+  line-height: 1.8;
+  color: #1f2f46;
+  margin-bottom: 20px;
+}
+
+#calc-para a,
+#calc-para1 a {
+  font-weight: bold;
+  color: #1f2f46;
+  text-decoration: none;
+  border-bottom: 2px solid #FEED95;
+  padding-bottom: 2px;
+  transition: border-color 0.2s ease;
+}
+
+#calc-para a:hover,
+#calc-para1 a:hover {
+  border-bottom-color: #1f2f46;
+}
+
+#calc-heading ~ h2 {
+  margin-top: 36px;
+  margin-bottom: 12px;
+  font-size: 26px;
+  color: #1f2f46;
+  padding-left: 14px;
+  position: relative;
+}
+
+#calc-heading ~ h2::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 6px;
+  width: 4px;
+  height: 65%;
+  background-color: #1f2f46;
+  border-radius: 2px;
+}
+
+#calc-heading ~ h2::after {
+  content: "";
+  display: block;
+  width: 70px;
+  height: 3px;
+  background-color: #FEED95;
+  margin-top: 6px;
+}
+
+#calc-heading ~ ul {
+  padding-left: 22px;
+}
+
+.tutorial-list li {
+  margin-bottom: 10px;
+  font-size: 17px;
+}
+
+.tutorial-list a {
+  font-weight: bold;
+  color: #1f2f46;
+  text-decoration: none;
+}
+
+/* COURSE SUB-HEADINGS (h3) */
+#calc-heading ~ h3 {
+  position: relative;
+  max-width: 900px;
+  margin: 12px auto;
+  padding-left: 20px;
+  font-size: 20px;
+  font-weight: bold;
+  color: #1f2f46;
+}
+
+#calc-heading ~ h3::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 5px;
+  width: 4px;
+  height: 70%;
+  background-color: #1f2f46;
+  border-radius: 2px;
+}
+
+#calc-heading ~ h3::after {
+  content: "";
+  display: block;
+  width: 120px;
+  height: 3px;
+  background-color: #FEED95;
+  margin-top: 6px;
+}
+
+/* FOOTER */
+footer {
+  background-color: #1f2f46;
+  color: white;
+  text-align: center;
+  padding: 22px 0;
+  margin-top: 30px;
+}
+
+footer::before {
+  content: "";
+  display: block;
+  width: 80%;
+  height: 1px;
+  background: rgba(255,255,255,0.15);
+  margin: 0 auto 18px;
+}
+
+footer .footer-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+}
+
+footer .footer-container a {
+  color: white;
+  font-size: 24px;
+  text-decoration: none;
+  position: relative;
+  transition: transform 0.25s ease, color 0.25s ease;
+}
+
+footer .footer-container a:hover {
+  color: #FEED95;
+  transform: translateY(-4px);
+}
+
+footer .footer-container a::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -6px;
+  width: 0;
+  height: 2px;
+  background-color: #FEED95;
+  transition: all 0.3s ease;
+}
+
+footer .footer-container a:hover::after {
+  width: 70%;
+  left: 15%;
+}
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+
+  .info-sections {
+    flex-direction: column;
+    gap: 30px;
+  }
+
+  #about,
+  #updated-news {
+    width: 100%;
+    height: auto;
+  }
+
+  .content {
+    padding: 20px;
+  }
+
+  .menu {
+    text-align: center;
+  }
+
+  .menu li {
+    display: block;
+  }
+
+  .menu li a {
+    padding: 12px;
+  }
+
+  .dropdown-content {
+    position: static;
+    box-shadow: none;
+  }
+}
+
+@media (max-width: 768px) {
+  #calc-heading { font-size: 32px; }
+  #calc-heading ~ h2 { font-size: 22px; }
+  #calc-para,
+  #calc-para1,
+  .tutorial-list li { font-size: 16px; }
+}
+
+@media (max-width: 600px) {
+  footer .footer-container {
+    gap: 22px;
+  }
+
+  footer .footer-container a {
+    font-size: 22px;
+  }
+}

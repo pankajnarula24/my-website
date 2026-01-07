@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Optimization Techniques</title>
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+<nav>
+  <!-- Hamburger icon for mobile -->
+  <div class="hamburger">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+
+  <ul class="menu">
+    <li><a href="index.html">Home</a></li>
+
+    <li class="dropdown">
+      <a href="#" class="courses-link">Courses <span class="arrow">▶</span></a>
+      <ul class="dropdown-content">
+        <li><a href="calculus.html" target="_blank">Calculus For Engineers</a></li>
+        <li><a href="diff_eqn.html" target="_blank">Differential Equation and Linear Algebra</a></li>
+        <li><a href="numerical.html" target="_blank">Numerical Linear Algebra</a></li>
+        <li><a href="optimization.html" target="_blank">Optimization Techniques</a></li>
+        <li><a href="probability.html" target="_blank">Probability and Statistics</a></li>
+      </ul>
+    </li>
+
+    <li><a href="research.html" target="_blank">Research</a></li>
+
+    <li class="dropdown">
+      <a href="#" class="new-dropdown-link">Notes and Ideas <span class="arrow">▶</span></a>
+      <ul class="dropdown-content">
+        <li><a href="teachingReflections.html" target="_blank">Teaching and Reflections</a></li>
+        <li><a href="explainers.html" target="_blank">Explainer</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+<div class="container">
+  <div class="content">
+    <h1 id="calc-heading">Optimization Techniques (UMA035)</h1>
+    <p id="calc-para">
+      The syllabus of Optimization Techniques (UMA035) is available 
+      <a href="https://drive.google.com/file/d/1cU5alFXQAOsbjYZbk9mGjFStRayZS_tT/view" target="_blank">
+        here.
+      </a>
+    </p>
+
+    <h3>Unit-II</h3>
+    <ul class="tutorial-list">
+      <li><a href="https://drive.google.com/file/d/1b4JTcp5JkOH7MyxeuDDapUvmVgPOo3Q_/view" target="_blank">Dual Simplex Method</a></li>
+      <li><a href="https://drive.google.com/file/d/1p-U83qbT4wLisl_dQEsqVx0aY-mL2d_P/view" target="_blank">Sensitivity Analysis</a></li>
+    </ul>
+
+    <h3>Unit-III</h3>
+    <ul class="tutorial-list">
+      <li><a href="https://drive.google.com/file/d/1vP368LKh1szAxfaqP6hI2LLjNC5MXr4g/view" target="_blank">Integer Programming(BnB)</a></li>
+    </ul>
+
+    <h3>Unit-IV</h3>
+    <ul class="tutorial-list">
+      <li><a href="https://drive.google.com/file/d/1QG0kmBZ9kJlN0VpCnBu5Wp7iYs_8dMZG/view" target="_blank">Transportation Problem (V-1)</a></li>
+      <li><a href="https://drive.google.com/file/d/1sBzN9ne3Ko_A2BdwwdMOvVMXlSAAkrrM/view" target="_blank">Assignment Problem (V-1)</a></li>
+    </ul>
+
+    <h3>Unit-V</h3>
+    <ul class="tutorial-list">
+      <li><a href="https://drive.google.com/file/d/1Itiqs9rCm3nfGlezY-VEWXN3kPRl92sx/view" target="_blank">Network Construction</a></li>
+      <li><a href="https://drive.google.com/file/d/1ETqlzfNwuyEpJ8xT9hgxB66blUl7_Ufd/view" target="_blank">Critical Path Method</a></li>
+      <li><a href="https://drive.google.com/file/d/1eIBvZu3cz-x0GNJ_RwqTYHckCnAR8gJc/view" target="_blank">Floats</a></li>
+      <li><a href="https://drive.google.com/file/d/1Cw0OpxFaoW9hXgpyyS0HcFyRAO9XiK3P/view" target="_blank">Crashing</a></li>
+    </ul>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-container">
+    <a href="mailto:mailbox@pankajnarula.com" title="Email">
+      <i class="fas fa-envelope"></i>
+    </a>
+    <!-- <a href="https://github.com/yourusername" target="_blank" title="GitHub">
+      <i class="fab fa-github"></i>
+    </a> -->
+    <a href="https://www.youtube.com/@pankajnarula9273" target="_blank" title="YouTube">
+      <i class="fab fa-youtube"></i>
+    </a>
+    <a href="https://www.linkedin.com/in/dr-pankaj-narula-5aa9a7199/" target="_blank" title="LinkedIn">
+      <i class="fab fa-linkedin"></i>
+    </a>
+  </div>
+</footer>
+<script src="announcements.js"></script>
+
+<script>
+const hamburger = document.querySelector('.hamburger');
+const menu = document.querySelector('.menu');
+
+hamburger.addEventListener('click', () => {
+  menu.classList.toggle('active');
+});
+</script>
+</body>
+</html>
