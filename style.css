@@ -3,11 +3,16 @@ body {
   font-family: 'Times New Roman', Times, serif;
   margin: 0;
   background-color: #F5F5DC;
+  font-size: 16px; 
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 .container {
   display: flex;
-  min-height: 100vh;
+  /* min-height: auto; */
+  flex: 1;
 }
 
 .sidebar {
@@ -15,6 +20,7 @@ body {
   background: #003366;
   padding: 20px;
   color: white;
+  box-sizing: border-box; 
 }
 
 .sidebar a {
@@ -22,16 +28,21 @@ body {
   display: block;
   margin: 10px 0;
   text-decoration: none;
+  font-size: 1rem; 
 }
 
 .content {
   flex: 1;
   padding: 40px;
+  box-sizing: border-box;
+
+  display: flex;
+  flex-direction: column;
 }
 
 /* HEADINGS */
 h1 {
-  font-size: 80px;
+  font-size: 5rem;
   text-align: center;
   color: #1f2f46;
   margin-top: 0;
@@ -43,7 +54,7 @@ h1 {
 }
 
 #name {
-  font-size: 38px;
+  font-size: 2.375rem; 
   margin: 0 0 50px 0;
   text-align: center;
   color: #1f2f46;
@@ -54,35 +65,41 @@ h1 {
   display: flex;
   flex-direction: row;
   gap: 80px;
+  align-items: stretch;
 }
 
 #about,
 #updated-news {
   flex: 1;
-  height: 220px;
+  /* height: 220px; */
   padding: 20px;
   border-radius: 20px;
+  min-height: 185px;  
+  box-sizing: border-box;     
+  display: flex;
+  flex-direction: column;
 }
 
 #about {
   background-color: #1f2f46;
   color: white;
-  width: 500px;
+  width:auto;
 }
 
 #updated-news {
   background-color: #FEED95;
   color: #1f2f46;
-  width: 500px;
+  width: auto;
 }
 
 #about h2,
 #updated-news h2 {
   margin-top: 5px;
+  margin-bottom: 5px; 
 }
 
 #about h3 {
-  margin: 10px 0;
+  margin: 6px 0;
 }
 
 #about a {
@@ -125,7 +142,7 @@ nav {
   color: #1f2f46;
   text-align: center;
   padding: 10px 20px;   
-  font-size: 19px;
+  font-size: 1.1875rem; 
   font-weight: bold;
   text-decoration: none;
   border-radius: 10px;
@@ -158,76 +175,6 @@ nav {
   border: 3px solid #1f2f46;
 }
 
-
-
-
-
-/* GLOBAL and previous styles remain unchanged */
-
-/* -------------------- HAMBURGER MENU -------------------- */
-.hamburger {
-  display: none;
-  flex-direction: column;
-  cursor: pointer;
-  padding: 10px;
-  gap: 4px;
-}
-
-.hamburger span {
-  width: 25px;
-  height: 3px;
-  background-color: #1f2f46;
-  transition: all 0.3s ease;
-}
-
-/* -------------------- RESPONSIVE NAVBAR -------------------- */
-@media (max-width: 900px) {
-
-  .hamburger {
-    display: flex; /* Show hamburger */
-  }
-
-  .menu {
-    display: none; /* Hide menu by default on mobile */
-    flex-direction: column;
-    width: 100%;
-    text-align: left;
-    padding-left: 0;
-  }
-
-  .menu.active {
-    display: flex; /* Show menu when hamburger is clicked */
-  }
-
-  .menu li {
-    display: block;
-    width: 100%;
-  }
-
-  .menu li a {
-    padding: 12px 16px;
-    font-size: 18px;
-  }
-
-  .dropdown-content {
-    position: static; /* Show dropdown normally under parent */
-    box-shadow: none;
-    padding-left: 20px;
-  }
-
-  .dropdown .arrow {
-    display: none; /* Hide arrows on mobile */
-  }
-}
-
-/* Optional smaller devices adjustments */
-@media (max-width: 600px) {
-  .menu li a {
-    font-size: 16px;
-    padding: 10px 14px;
-  }
-}
-
 /* DROPDOWN MENU */
 .dropdown-content {
   display: none;
@@ -243,11 +190,12 @@ nav {
 
 .dropdown-content li {
   display: block;
+  text-align: left;
 }
 
 .dropdown-content li a {
-  padding: 8px 14px;
-  font-size: 16px;
+  padding: 8px 12px;
+  font-size: 0.9rem;
   margin-left: 0;
 }
 
@@ -273,7 +221,7 @@ nav {
 
 /* ANNOUNCEMENTS */
 .news-container {
-  height: 150px;
+  height: auto;
   overflow: hidden;
   position: relative;
 }
@@ -282,7 +230,7 @@ nav {
   list-style: none;
   padding: 0;
   margin: 0;
-  max-height: 150px; 
+  max-height: 180px; 
   overflow-y: auto;    
   overflow-x: hidden;
 
@@ -314,7 +262,7 @@ nav {
 #news-list li {
   display: block;
   padding: 6px 20px 6px 6px;
-  font-size: 16px;
+  font-size: 1rem; /* Use rem */
   text-align: left;
 }
 
@@ -347,35 +295,39 @@ nav {
   font-style: italic;
 }
 
-.news-item.recent .news-text {
-  color: red;
-  font-weight: bold;
+.new-badge img {
+  width: 20px;
+  height: 20px;
+  margin-left: 5px;
+  vertical-align: middle;
+  cursor: pointer;
+  animation: blink 1s infinite; 
 }
 
-.news-item.recent .news-text::before {
-  content: "⭐ ";
-  font-size: 18px;
+.new-badge img {
+  width: 25px;    
+  height: auto;
+  vertical-align: middle;
 }
 
-/* NEW ANNOUNCEMENT BADGE */
-.new-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: -12px;
-  margin-left: 6px;
-  padding: 2px 2px;
-  font-size: 16px;
-  font-weight: bold;
-  color: red;     
-  background: none;    
-  position: sticky;
-  top: 0;
+
+.news-text a img {
+  width: 20px;
+  height: 20px;
+  margin-left: 5px;
+  vertical-align: middle;
+  cursor: pointer;
   animation: blink 1s infinite;
 }
 
-.new-badge::before {
-  content: "💥";
-  font-size: 22px;
+/* Clickable older text */
+.news-text a {
+  color: #1f2f46;
+  text-decoration: none;
+}
+
+.news-text a:hover {
+  text-decoration: underline;
 }
 
 @keyframes blink {
@@ -390,8 +342,6 @@ nav {
   overflow: hidden;
   white-space: nowrap;
   box-sizing: border-box;
-  padding: 0px 0;
-  margin: 10px 0;
   border-radius: 4px;
 }
 
@@ -399,7 +349,7 @@ nav {
   display: inline-block;
   color: #FFD700; 
   font-weight: bold;
-  font-size: 12px;
+  font-size: 10px;
   padding-left: 100%; 
   animation: scroll-text 15s linear infinite;
 }
@@ -411,7 +361,7 @@ nav {
 
 /* COURSE / CALCULUS PAGE (same for all courses) */
 #calc-heading {
-  font-size: 42px;
+  font-size: 2.625rem;
   text-align: center;
   color: #1f2f46;
   margin: 0 0 28px 0;
@@ -430,7 +380,7 @@ nav {
 
 #calc-para,
 #calc-para1 {
-  font-size: 17px;
+  font-size: 1.0625rem; 
   line-height: 1.8;
   color: #1f2f46;
   margin-bottom: 20px;
@@ -454,7 +404,7 @@ nav {
 #calc-heading ~ h2 {
   margin-top: 36px;
   margin-bottom: 12px;
-  font-size: 26px;
+  font-size: 1.625rem; 
   color: #1f2f46;
   padding-left: 14px;
   position: relative;
@@ -486,7 +436,7 @@ nav {
 
 .tutorial-list li {
   margin-bottom: 10px;
-  font-size: 17px;
+  font-size: 1.0625rem; 
 }
 
 .tutorial-list a {
@@ -499,9 +449,9 @@ nav {
 #calc-heading ~ h3 {
   position: relative;
   max-width: 900px;
-  margin: 12px auto;
+  margin: 12px 0;
   padding-left: 20px;
-  font-size: 20px;
+  font-size: 1.25rem; 
   font-weight: bold;
   color: #1f2f46;
 }
@@ -553,7 +503,7 @@ footer .footer-container {
 
 footer .footer-container a {
   color: white;
-  font-size: 24px;
+  font-size: 1.5rem; /* Use rem */
   text-decoration: none;
   position: relative;
   transition: transform 0.25s ease, color 0.25s ease;
@@ -581,55 +531,188 @@ footer .footer-container a:hover::after {
 }
 
 /* RESPONSIVE */
-@media (max-width: 900px) {
-
+@media (max-width: 1200px) {
+  .sidebar {
+    width: 200px;
+  }
   .info-sections {
+    gap: 40px;
     flex-direction: column;
-    gap: 30px;
-  }
-
-  #about,
-  #updated-news {
     width: 100%;
-    height: auto;
+    /* height: auto; */
+  }
+  #about {
+    padding-bottom: 20px;
+    margin: 4px 0; 
+    text-align:start;
   }
 
+  #updated-news h2 {
+    margin-top: 0px;
+  }
+
+  #about, #updated-news {
+    width: 100%;
+    /* height: fit-content; */
+  }
+}
+
+@media (max-width: 900px) {
+  .container {
+    flex-direction: column;
+  }
+  .sidebar {
+    width: 100%;
+    padding: 10px;
+  }
   .content {
     padding: 20px;
   }
-
-  .menu {
-    text-align: center;
+  .info-sections {
+    gap: 30px;
   }
 
-  .menu li {
-    display: block;
+  #about h3 {
+    margin: 4px 0;    
   }
-
-  .menu li a {
-    padding: 12px;
-  }
-
-  .dropdown-content {
-    position: static;
-    box-shadow: none;
+  #about, #updated-news {
+    flex: 1;
+    width: 100%;
+    max-width: 100% ;
+    align-self: stretch;
+    height: fit-content;
   }
 }
 
 @media (max-width: 768px) {
-  #calc-heading { font-size: 32px; }
-  #calc-heading ~ h2 { font-size: 22px; }
-  #calc-para,
-  #calc-para1,
-  .tutorial-list li { font-size: 16px; }
+  h1 {
+    font-size: 3rem;
+  }
+  #name {
+    font-size: 2rem;
+  }
+  #calc-heading {
+    font-size: 2rem;
+  }
+  #calc-heading ~ h2 {
+    font-size: 1.375rem;
+  }
+  #calc-para, #calc-para1, .tutorial-list li {
+    font-size: 1rem;
+  }
+  .news-container {
+    height: 120px;
+  }
+  #news-list {
+    max-height: 120px;
+  }
 }
 
 @media (max-width: 600px) {
+  .content {
+    padding: 15px;
+  }
+  h1 {
+    font-size: 2.5rem;
+  }
+  #name {
+    font-size: 1.5rem;
+  }
+  #calc-heading {
+    font-size: 1.75rem;
+  }
+  #calc-heading ~ h2 {
+    font-size: 1.25rem;
+  }
+  #calc-para, #calc-para1, .tutorial-list li {
+    font-size: 0.9375rem;
+  }
   footer .footer-container {
-    gap: 22px;
+    flex-direction: column;
+    gap: 15px;
   }
-
   footer .footer-container a {
-    font-size: 22px;
+    font-size: 1.375rem;
   }
+  .construction-banner p {
+    font-size: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .sidebar {
+    padding: 5px;
+  }
+  .sidebar a {
+    font-size: 0.875rem;
+  }
+  .menu li a {
+    font-size: 1rem;
+    padding: 10px;
+  }
+  .news-item {
+    font-size: 0.875rem;
+  }
+  .new-badge {
+    font-size: 0.875rem;
+  }
+  .new-badge::before {
+    font-size: 18px;
+  }
+}
+
+/* Touch-friendly adjustments for mobile */
+@media (hover: none) and (pointer: coarse) {
+  .menu li a, .sidebar a, .tutorial-list a {
+    padding: 15px; /* Larger touch targets */
+    min-height: 44px; /* iOS/Android guideline */
+  }
+  .dropdown:hover .dropdown-content {
+    display: none; 
+  }
+  .dropdown:active .dropdown-content {
+    display: block; 
+  }
+}
+
+/* Cross-browser animation prefixes */
+@keyframes blink {
+  0%, 50%, 100% { opacity: 1; }
+  25%, 75% { opacity: 0; }
+}
+@-webkit-keyframes blink {
+  0%, 50%, 100% { opacity: 1; }
+  25%, 75% { opacity: 0; }
+}
+.new-badge {
+  -webkit-animation: blink 1s infinite;
+  animation: blink 1s infinite;
+}
+
+@keyframes scroll-text {
+  0% { transform: translateX(0%); }
+  100% { transform: translateX(-100%); }
+}
+@-webkit-keyframes scroll-text {
+  0% { -webkit-transform: translateX(0%); }
+  100% { -webkit-transform: translateX(-100%); }
+}
+.construction-banner p {
+  -webkit-animation: scroll-text 15s linear infinite;
+  animation: scroll-text 15s linear infinite;
+}
+
+/* FORCE DESKTOP NAVBAR ON ALL SCREENS */
+
+.menu {
+  display: block !important;
+  text-align: right !important;
+}
+
+.menu li {
+  display: inline-block !important;
+}
+
+.dropdown-content {
+  position: absolute !important;
 }
