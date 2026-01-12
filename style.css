@@ -100,6 +100,8 @@ h1 {
 
 #about h3 {
   margin: 6px 0;
+  font-size: 1rem;
+  font-weight: normal;
 }
 
 #about a {
@@ -115,39 +117,51 @@ h1 {
   margin-left: 80px;
 }
 
-/* NAVBAR */
+/* FORCE DESKTOP NAVBAR ON ALL SCREENS */
+
 nav {
   position: sticky;
   top: 0;
   z-index: 2000;
   background-color: #FEED95;
   box-shadow: 0 3px 10px rgba(0,0,0,0.15);
+  overflow: visible;
+  flex-wrap: nowrap; 
 }
 
+/* MENU */
 .menu {
   list-style: none;
   margin: 0;
   padding: 6px 20px;
   background-color: #FEED95;
-  text-align: right;
+
+  display: flex;
+  justify-content: flex-end;
+  flex-wrap: nowrap;
+  align-items: center;
+  overflow: visible;
 }
+
 
 .menu li {
-  display: inline-block;
   position: relative;
+  flex: 0 0 auto;
 }
 
+/* LINKS */
 .menu li a {
   display: block;
   color: #1f2f46;
   text-align: center;
-  padding: 10px 20px;   
-  font-size: 1.1875rem; 
+  padding: 8px 10px;
+  font-size: 14px;
   font-weight: bold;
   text-decoration: none;
   border-radius: 10px;
-  position: relative;
+  white-space: nowrap;
   transition: background-color 0.25s ease, transform 0.2s ease;
+  position: relative;
 }
 
 .menu li a:hover {
@@ -155,6 +169,7 @@ nav {
   transform: translateY(-1px);
 }
 
+/* underline animation */
 .menu li a::after {
   content: "";
   position: absolute;
@@ -171,52 +186,134 @@ nav {
   left: 15%;
 }
 
-.menu li a:active {
-  border: 3px solid #1f2f46;
+/* COURSES DROPDOWN */
+.dropdown.courses-dropdown {
+  position: relative;
+  text-align: left; 
 }
 
-/* DROPDOWN MENU */
-.dropdown-content {
+.dropdown.courses-dropdown .dropdown-content {
   display: none;
   position: absolute;
+  top: 110%;
+  left: 0;                  
+  transform: none;
   background-color: #FEED95;
-  min-width: 180px;
-  z-index: 1000;
-  border-radius: 12px;
+  min-width: 260px;          
+  max-width: 90vw;
+  z-index: 3000;
+  border-radius: 20px;
   box-shadow: 0 8px 20px rgba(0,0,0,0.2);
-  padding: 6px 0;
-  text-align: left;
+  padding: 0;            
+  margin: 0;
+  list-style: none;         
 }
 
-.dropdown-content li {
+/* Dropdown items */
+.dropdown.courses-dropdown .dropdown-content li {
+  margin: 0;
+  padding: 0;              
+}
+
+.dropdown.courses-dropdown .dropdown-content li a {
   display: block;
-  text-align: left;
-}
-
-.dropdown-content li a {
-  padding: 8px 12px;
+  padding: 8px 16px;        
   font-size: 0.9rem;
-  margin-left: 0;
+  text-align: left;         
+  box-sizing: border-box;   
+  white-space: nowrap;      
 }
 
-.dropdown-content li a:hover {
-  background-color: rgba(31,47,70,0.12);
-}
-
-.dropdown:hover .dropdown-content {
+/* Show dropdown on hover or open (mobile) */
+.dropdown.courses-dropdown:hover .dropdown-content,
+.dropdown.courses-dropdown.open .dropdown-content {
   display: block;
 }
 
-.arrow {
-  display: inline-block;
-  margin-left: 6px;
+/* NOTES & IDEAS DROPDOWN */
+.dropdown.notes-dropdown {
+  position: relative;
+  text-align: left; 
+}
+
+.dropdown.notes-dropdown .dropdown-content {
+  display: none;
+  position: absolute;
+  top: 110%;
+  right: 0;
+  left: auto;
+  transform: none;
+
+  background-color: #FEED95;
+  width: max-content;
+  max-width: 90vw;
+
+  z-index: 3000;
+  border-radius: 12px;
+  box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+  padding: 4px 0;
+  text-align: center;
+
+  list-style: none;      
+  margin: 0;
+}
+
+/* Dropdown items */
+.dropdown.notes-dropdown .dropdown-content li a {
+  display: block;
+  padding: 6px 12px;
+  font-size: 0.85rem;
+  white-space: nowrap;
+}
+
+/* Show dropdown on hover or open */
+.dropdown.notes-dropdown:hover .dropdown-content,
+.dropdown.notes-dropdown.open .dropdown-content {
+  display: block;
+}
+
+/* Arrow styling */
+.dropdown.notes-dropdown .arrow {
+  margin-left: 5px;
   font-size: 12px;
-  color: #1f2f46;
   transition: transform 0.3s ease;
 }
 
-.dropdown:hover .arrow {
+/* Rotate arrow on hover or when open */
+.dropdown.notes-dropdown:hover .arrow,
+.dropdown.notes-dropdown.open .arrow {
   transform: rotate(90deg);
+}
+
+
+/* Default arrow (pointing right) */
+.dropdown.notes-dropdown .arrow {
+  margin-left: 5px;
+  font-size: 12px;
+  transition: transform 0.3s ease;
+  display: inline-block; 
+  transform: rotate(0deg); 
+}
+
+/* Arrow points down when open */
+.dropdown.notes-dropdown.open .arrow,
+.dropdown.notes-dropdown:hover .arrow {
+  transform: rotate(90deg); 
+}
+
+/* Default arrow (pointing right) */
+.dropdown.courses-dropdown .arrow {
+  margin-left: 5px;
+  font-size: 12px;
+  display: inline-block;   
+  transition: transform 0.3s ease;
+  transform: rotate(0deg); 
+}
+
+/* Rotate arrow when dropdown is open */
+.dropdown.courses-dropdown.open .arrow,
+.dropdown.courses-dropdown:hover .arrow {
+  transform: rotate(90deg); 
 }
 
 /* ANNOUNCEMENTS */
@@ -262,7 +359,7 @@ nav {
 #news-list li {
   display: block;
   padding: 6px 20px 6px 6px;
-  font-size: 1rem; /* Use rem */
+  font-size: 1rem; 
   text-align: left;
 }
 
@@ -503,7 +600,7 @@ footer .footer-container {
 
 footer .footer-container a {
   color: white;
-  font-size: 1.5rem; /* Use rem */
+  font-size: 1.5rem;
   text-decoration: none;
   position: relative;
   transition: transform 0.25s ease, color 0.25s ease;
@@ -530,189 +627,263 @@ footer .footer-container a:hover::after {
   left: 15%;
 }
 
-/* RESPONSIVE */
+
+
+/* RESPONSIVE LAYOUT */
+
 @media (max-width: 1200px) {
-  .sidebar {
-    width: 200px;
-  }
+  .sidebar { width: 200px; }
+
   .info-sections {
-    gap: 40px;
     flex-direction: column;
+    gap: 40px;
     width: 100%;
-    /* height: auto; */
   }
+
   #about {
+    margin: 4px 0;
     padding-bottom: 20px;
-    margin: 4px 0; 
-    text-align:start;
+    text-align: start;
   }
 
-  #updated-news h2 {
-    margin-top: 0px;
-  }
+  #updated-news h2 { margin-top: 0; }
 
-  #about, #updated-news {
-    width: 100%;
-    /* height: fit-content; */
-  }
+  #about, #updated-news { width: 100%; }
 }
 
 @media (max-width: 900px) {
-  .container {
-    flex-direction: column;
-  }
+  .container { flex-direction: column; }
+
   .sidebar {
     width: 100%;
     padding: 10px;
   }
-  .content {
-    padding: 20px;
-  }
-  .info-sections {
-    gap: 30px;
-  }
 
-  #about h3 {
-    margin: 4px 0;    
-  }
+  .content { padding: 20px; }
+
+  .info-sections { gap: 30px; }
+
+  #about h3 { margin: 4px 0; }
+
   #about, #updated-news {
     flex: 1;
     width: 100%;
-    max-width: 100% ;
+    max-width: 100%;
     align-self: stretch;
     height: fit-content;
   }
 }
 
 @media (max-width: 768px) {
-  h1 {
-    font-size: 3rem;
-  }
-  #name {
-    font-size: 2rem;
-  }
-  #calc-heading {
-    font-size: 2rem;
-  }
-  #calc-heading ~ h2 {
-    font-size: 1.375rem;
-  }
-  #calc-para, #calc-para1, .tutorial-list li {
-    font-size: 1rem;
-  }
-  .news-container {
-    height: 120px;
-  }
-  #news-list {
-    max-height: 120px;
-  }
+  h1 { font-size: 3rem; }
+  #name { font-size: 2rem; }
+  #calc-heading { font-size: 2rem; }
+  #calc-heading ~ h2 { font-size: 1.375rem; }
+  #calc-para,
+  #calc-para1,
+  .tutorial-list li { font-size: 1rem; }
+
+  .news-container,
+  #news-list { max-height: 120px; }
 }
 
 @media (max-width: 600px) {
-  .content {
-    padding: 15px;
-  }
-  h1 {
-    font-size: 2.5rem;
-  }
-  #name {
-    font-size: 1.5rem;
-  }
-  #calc-heading {
-    font-size: 1.75rem;
-  }
-  #calc-heading ~ h2 {
-    font-size: 1.25rem;
-  }
-  #calc-para, #calc-para1, .tutorial-list li {
-    font-size: 0.9375rem;
-  }
+  .content { padding: 10px; }
+
+  h1 { font-size: 2.5rem; }
+  #name { font-size: 1.5rem; }
+  #calc-heading { font-size: 1.75rem; }
+  #calc-heading ~ h2 { font-size: 1.25rem; }
+
+  #calc-para,
+  #calc-para1,
+  .tutorial-list li { font-size: 0.9375rem; }
+
   footer .footer-container {
-    flex-direction: column;
+    flex-direction: row;
     gap: 15px;
   }
-  footer .footer-container a {
-    font-size: 1.375rem;
-  }
-  .construction-banner p {
-    font-size: 10px;
-  }
+
+  footer .footer-container a { font-size: 1.375rem; }
+
+  .construction-banner p { font-size: 10px; }
 }
 
 @media (max-width: 480px) {
-  .sidebar {
-    padding: 5px;
-  }
-  .sidebar a {
-    font-size: 0.875rem;
-  }
+  .sidebar { padding: 5px; }
+
+  .sidebar a { font-size: 0.875rem; }
+
   .menu li a {
     font-size: 1rem;
     padding: 10px;
   }
-  .news-item {
-    font-size: 0.875rem;
-  }
-  .new-badge {
-    font-size: 0.875rem;
-  }
-  .new-badge::before {
-    font-size: 18px;
-  }
+
+  .news-item,
+  .new-badge { font-size: 0.875rem; }
+
+  .new-badge::before { font-size: 18px; }
 }
 
-/* Touch-friendly adjustments for mobile */
+/* TOUCH DEVICES */
+
 @media (hover: none) and (pointer: coarse) {
-  .menu li a, .sidebar a, .tutorial-list a {
-    padding: 15px; /* Larger touch targets */
-    min-height: 44px; /* iOS/Android guideline */
+  .menu li a,
+  .sidebar a,
+  .tutorial-list a {
+    padding: 15px;
+    min-height: 44px;
   }
-  .dropdown:hover .dropdown-content {
-    display: none; 
-  }
-  .dropdown:active .dropdown-content {
-    display: block; 
-  }
+
+  .dropdown:hover .dropdown-content { display: none; }
 }
 
-/* Cross-browser animation prefixes */
+/* ANIMATIONS */
+
 @keyframes blink {
   0%, 50%, 100% { opacity: 1; }
   25%, 75% { opacity: 0; }
 }
-@-webkit-keyframes blink {
-  0%, 50%, 100% { opacity: 1; }
-  25%, 75% { opacity: 0; }
-}
+
 .new-badge {
-  -webkit-animation: blink 1s infinite;
   animation: blink 1s infinite;
 }
 
 @keyframes scroll-text {
-  0% { transform: translateX(0%); }
-  100% { transform: translateX(-100%); }
+  from { transform: translateX(0); }
+  to   { transform: translateX(-100%); }
 }
-@-webkit-keyframes scroll-text {
-  0% { -webkit-transform: translateX(0%); }
-  100% { -webkit-transform: translateX(-100%); }
-}
+
 .construction-banner p {
-  -webkit-animation: scroll-text 15s linear infinite;
   animation: scroll-text 15s linear infinite;
 }
 
-/* FORCE DESKTOP NAVBAR ON ALL SCREENS */
+/* MOBILE NAVBAR */
 
-.menu {
-  display: block !important;
-  text-align: right !important;
-}
+@media (max-width: 768px) {
 
-.menu li {
-  display: inline-block !important;
-}
+  html, body {
+    margin: 0;
+    padding: 0;
+  }
 
-.dropdown-content {
-  position: absolute !important;
+  nav {
+    height: 48px;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  .menu {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 8px;
+    height: 100%;
+    padding: 0 12px;
+    overflow: visible;
+  }
+
+  .menu li {
+    position: relative;
+    margin: 0;
+  }
+
+  .menu li a {
+    display: inline-flex;
+    align-items: center;
+    height: 100%;
+    padding: 0 8px;
+    font-size: 13px;
+    font-weight: bold;
+    white-space: nowrap;
+    border-radius: 10px;
+    color: #1f2f46;
+    text-decoration: none;
+    position: relative;
+    transition: transform 0.2s ease, box-shadow 0.25s ease;
+  }
+
+  .menu li a:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  }
+
+  .menu li a::after {
+    content: "";
+    position: absolute;
+    bottom: 4px;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background: #1f2f46;
+    transition: all 0.3s ease;
+  }
+
+  .menu li a:hover::after {
+    width: 70%;
+    left: 15%;
+  }
+
+  /* DROPDOWNS (shared) */
+
+  .dropdown .arrow {
+    margin-left: 5px;
+    font-size: 12px;
+    transition: transform 0.3s ease;
+  }
+
+  .dropdown.open .arrow,
+  .dropdown:hover .arrow {
+    transform: rotate(90deg);
+  }
+
+  .dropdown .dropdown-content {
+    display: none;
+    position: absolute;
+    max-width: 90vw;
+    background: #FEED95;
+    border-radius: 12px;
+    box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+    z-index: 3000;
+    list-style: none;
+    padding: 0;
+  }
+
+  .dropdown.open .dropdown-content,
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }
+
+  /* COURSES */
+
+  .dropdown.courses-dropdown > a { padding-right: 20px; }
+
+  .dropdown.courses-dropdown .dropdown-content {
+    left: 0;
+    min-width: 200px;
+  }
+
+  .dropdown.courses-dropdown .dropdown-content li a {
+    padding: 8px 12px;
+    font-size: 0.9rem;
+  }
+
+  /* NOTES */
+
+  .dropdown.notes-dropdown .dropdown-content {
+    right: 0;
+    left: auto;
+    padding: 4px 0;
+    text-align: center;
+  }
+
+  .dropdown.notes-dropdown .dropdown-content li a {
+    padding: 5px 10px;
+    font-size: 0.85rem;
+  }
+
+  .dropdown .dropdown-content li a:hover {
+    background: rgba(31,47,70,0.12);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  }
 }
