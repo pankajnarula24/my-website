@@ -42,7 +42,7 @@
     <h2>Current Notes</h2>
     <p id="calc-para1">
       The class notes for 2025-26 (odd) can be found
-      <a href="https://drive.google.com/file/d/1kQz-k4Q7y1uMxXgPR3FSzMJneiKauhMa/view" target="_blank">
+      <a href="https://drive.google.com/file/d/1vUVkbSmvIA0HGV_UMvy4udVx0Ilzx2Ul/view?usp=sharing" target="_blank">
         here.
       </a>
     </p>
@@ -63,65 +63,6 @@
 
 <script src="announcements.js"></script>
 
-<script>
-fetch('navbar.html')
-  .then(response => response.text())
-  .then(data => {
-    document.getElementById('navbar-placeholder').innerHTML = data;
-
-    // Desktop hover links (optional)
-    document.querySelectorAll(".dropdown > a").forEach(link=>{
-      // you can remove this if using CSS hover
-    });
-
-    // Mobile dropdown setup
-    function setupMobileDropdowns() {
-      if (window.innerWidth <= 768) { // only for mobile
-        const dropdowns = document.querySelectorAll('.dropdown');
-
-        dropdowns.forEach(dropdown => {
-          const link = dropdown.querySelector('a');
-
-          // Remove previous listeners to avoid duplicates
-          link.replaceWith(link.cloneNode(true));
-        });
-
-        const newDropdowns = document.querySelectorAll('.dropdown');
-
-        newDropdowns.forEach(dropdown => {
-          const link = dropdown.querySelector('a');
-
-          link.addEventListener('click', function(e) {
-            e.preventDefault();
-            e.stopPropagation(); // prevent immediate close
-            dropdown.classList.toggle('open'); // toggle dropdown
-          });
-        });
-
-        // Close dropdown if clicking outside
-        document.addEventListener('click', function() {
-          newDropdowns.forEach(dropdown => {
-            dropdown.classList.remove('open');
-          });
-        });
-      }
-    }
-
-    setupMobileDropdowns();
-
-    window.addEventListener('resize', setupMobileDropdowns);
-  })
-  .catch(err => console.error('Error loading navbar:', err));
-</script>
-
-<script>
-fetch('footer.html')
-  .then(response => response.text())
-  .then(data => {
-    document.getElementById('footer-placeholder').innerHTML = data;
-  })
-  .catch(err => console.error('Error loading footer:', err));
-</script>
-
+<script src="dropdown.js"></script>
 </body>
 </html>

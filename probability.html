@@ -13,80 +13,48 @@
 
 <div class="container">
   <div class="content">
-    <h1 id="calc-heading">Probability and Statistics</h1>
-    <p>Course materials will be added here.</p>
-     <h2>Current Notes</h2>
-     <p id="calc-para1">
-      The class notes for 2025-26 (odd) can be found
-      <a href="https://drive.google.com/file/d/1pOjlym4pJLfhmDiBrP4ycNjZ8LsRTQi5/view" target="_blank">
+    <h1 id="calc-heading">Probability and Statistics (UMA401)</h1>
+
+
+
+    <!-- Add syllabus link here -->
+    <!-- <p id="calc-para">
+      The syllabus of Probability and Statistics (UMA401) is available 
+      <a href="" target="_blank">
         here.
       </a>
-    </p> 
-   </div>
-    </div>
-   <div id="footer-placeholder"></div>
+    </p> -->
+
+    <h2>Labs</h2>
+    <ul class="tutorial-list">
+      <li><a href=" https://drive.google.com/file/d/1yvuH6i3voS-XCd9BrGv6p3Zife23B7yR/view?usp=sharing" target="_blank">Lab-1</a></li>
+      <li><a href="https://drive.google.com/file/d/1VsELnrsvcoHs4wuZxUvheFDy5QTHYzpP/view?usp=sharing" target="_blank">Lab-2</a></li>
+      <li><a href="https://drive.google.com/file/d/1QIUC54BRXM3IvGw_lRcEn8y_1O6yrukO/view?usp=sharing" target="_blank">Lab-3</a></li>
+      <li><a href="https://drive.google.com/file/d/1sfUYgpupry14geNZLFzfqoksj2fsPjFX/view?usp=sharing" target="_blank">Lab-4</a></li>
+      <li><a href="https://drive.google.com/file/d/17E0weiChtz_edMaLJ_A2RzlX6isiKAaW/view?usp=sharing" target="_blank">Lab-5</a></li>
+      <li><a href="https://drive.google.com/file/d/1c8OE9UtyqADgCWD0XM_2L69n0qMfaST_/view?usp=sharing" target="_blank">Lab-6</a></li>
+      <li><a href="https://drive.google.com/file/d/1OamaH20OaPSs9ZEO8fLl40l6UMLvJrJH/view?usp=sharing" target="_blank">Lab-7</a></li>
+      <li><a href="https://drive.google.com/file/d/1WrUkF3vAl9frJIdwqxre6Y1mWHvsC_7k/view?usp=sharing" target="_blank">Lab-8</a></li>
+      <li><a href="https://drive.google.com/file/d/1efFHV9oD16hVxQMk_FbgTafWu2V44oB-/view?usp=sharing" target="_blank">Lab-9</a></li>
+      <li><a href="https://drive.google.com/file/d/1HDD_MvPOETmVMf7XPQuU9XZKHOi5RCmJ/view?usp=sharing" target="_blank">Lab-10</a></li>
+      <li><a href="https://drive.google.com/file/d/1zJXIaGydLsGFwDLB-nQEMiZz8P1Vvda7/view?usp=sharing" target="_blank">Lab-11</a></li>
+    </ul>
+
+    <h2>Current Notes</h2>
+    <p id="calc-para1">
+      The class notes for 2025-26 (odd) can be found
+      <a href="https://drive.google.com/file/d/1NOCmiiSPp3hxKxRKWImsRRvFJHg8LL-U/view?usp=sharing" target="_blank">
+        here.
+      </a>
+    </p>
+  </div>
+</div>
+
+<div id="footer-placeholder"></div>
 
 <script src="announcements.js"></script>
 
-<script>
-fetch('navbar.html')
-  .then(response => response.text())
-  .then(data => {
-    document.getElementById('navbar-placeholder').innerHTML = data;
-
-    // Desktop hover links (optional)
-    document.querySelectorAll(".dropdown > a").forEach(link=>{
-      // you can remove this if using CSS hover
-    });
-
-    // Mobile dropdown setup
-    function setupMobileDropdowns() {
-      if (window.innerWidth <= 768) { // only for mobile
-        const dropdowns = document.querySelectorAll('.dropdown');
-
-        dropdowns.forEach(dropdown => {
-          const link = dropdown.querySelector('a');
-
-          // Remove previous listeners to avoid duplicates
-          link.replaceWith(link.cloneNode(true));
-        });
-
-        const newDropdowns = document.querySelectorAll('.dropdown');
-
-        newDropdowns.forEach(dropdown => {
-          const link = dropdown.querySelector('a');
-
-          link.addEventListener('click', function(e) {
-            e.preventDefault();
-            e.stopPropagation(); // prevent immediate close
-            dropdown.classList.toggle('open'); // toggle dropdown
-          });
-        });
-
-        // Close dropdown if clicking outside
-        document.addEventListener('click', function() {
-          newDropdowns.forEach(dropdown => {
-            dropdown.classList.remove('open');
-          });
-        });
-      }
-    }
-
-    setupMobileDropdowns();
-
-    window.addEventListener('resize', setupMobileDropdowns);
-  })
-  .catch(err => console.error('Error loading navbar:', err));
-</script>
-
-<script>
-fetch('footer.html')
-  .then(response => response.text())
-  .then(data => {
-    document.getElementById('footer-placeholder').innerHTML = data;
-  })
-  .catch(err => console.error('Error loading footer:', err));
-</script>
+<script src="dropdown.js"></script>
 
 </body>
 </html>
