@@ -3,7 +3,7 @@ body {
   font-family: 'Times New Roman', Times, serif;
   margin: 0;
   background-color: #F5F5DC;
-  font-size: 16px; 
+  font-size: 16px;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -20,7 +20,7 @@ body {
   background: #003366;
   padding: 20px;
   color: white;
-  box-sizing: border-box; 
+  box-sizing: border-box;
 }
 
 .sidebar a {
@@ -28,7 +28,7 @@ body {
   display: block;
   margin: 10px 0;
   text-decoration: none;
-  font-size: 1rem; 
+  font-size: 1rem;
 }
 
 .content {
@@ -54,7 +54,7 @@ h1 {
 }
 
 #name {
-  font-size: 2.375rem; 
+  font-size: 2.375rem;
   margin: 0 0 50px 0;
   text-align: center;
   color: #1f2f46;
@@ -101,7 +101,7 @@ h1 {
 #about h2,
 #updated-news h2 {
   margin-top: 5px;
-  margin-bottom: 5px; 
+  margin-bottom: 5px;
 }
 
 #about h3 {
@@ -132,7 +132,7 @@ nav {
   background-color: #FEED95;
   box-shadow: 0 3px 10px rgba(0,0,0,0.15);
   overflow: visible;
-  flex-wrap: nowrap; 
+  flex-wrap: nowrap;
 }
 
 /* MENU */
@@ -195,39 +195,39 @@ nav {
 /* COURSES DROPDOWN */
 .dropdown.courses-dropdown {
   position: relative;
-  text-align: left; 
+  text-align: left;
 }
 
 .dropdown.courses-dropdown .dropdown-content {
   display: none;
   position: absolute;
   top: 110%;
-  left: 0;                  
+  left: 0;
   transform: none;
   background-color: #FEED95;
-  min-width: 260px;          
+  min-width: 260px;
   max-width: 90vw;
   z-index: 3000;
   border-radius: 20px;
   box-shadow: 0 8px 20px rgba(0,0,0,0.2);
-  padding: 0;            
+  padding: 0;
   margin: 0;
-  list-style: none;         
+  list-style: none;
 }
 
 /* Dropdown items */
 .dropdown.courses-dropdown .dropdown-content li {
   margin: 0;
-  padding: 0;              
+  padding: 0;
 }
 
 .dropdown.courses-dropdown .dropdown-content li a {
   display: block;
-  padding: 8px 16px;        
+  padding: 8px 16px;
   font-size: 0.9rem;
-  text-align: left;         
-  box-sizing: border-box;   
-  white-space: nowrap;      
+  text-align: left;
+  box-sizing: border-box;
+  white-space: nowrap;
 }
 
 /* Show dropdown on hover or open (mobile) */
@@ -239,7 +239,7 @@ nav {
 /* NOTES & IDEAS DROPDOWN */
 .dropdown.notes-dropdown {
   position: relative;
-  text-align: left; 
+  text-align: left;
 }
 
 .dropdown.notes-dropdown .dropdown-content {
@@ -260,7 +260,7 @@ nav {
   padding: 4px 0;
   text-align: left;
 
-  list-style: none;      
+  list-style: none;
   margin: 0;
 }
 
@@ -298,29 +298,29 @@ nav {
   margin-left: 5px;
   font-size: 12px;
   transition: transform 0.3s ease;
-  display: inline-block; 
-  transform: rotate(0deg); 
+  display: inline-block;
+  transform: rotate(0deg);
 }
 
 /* Arrow points down when open */
 .dropdown.notes-dropdown.open .arrow,
 .dropdown.notes-dropdown:hover .arrow {
-  transform: rotate(90deg); 
+  transform: rotate(90deg);
 }
 
 /* Default arrow (pointing right) */
 .dropdown.courses-dropdown .arrow {
   margin-left: 5px;
   font-size: 12px;
-  display: inline-block;   
+  display: inline-block;
   transition: transform 0.3s ease;
-  transform: rotate(0deg); 
+  transform: rotate(0deg);
 }
 
 /* Rotate arrow when dropdown is open */
 .dropdown.courses-dropdown.open .arrow,
 .dropdown.courses-dropdown:hover .arrow {
-  transform: rotate(90deg); 
+  transform: rotate(90deg);
 }
 
 /* ANNOUNCEMENTS */
@@ -338,8 +338,8 @@ nav {
   list-style: none;
   padding: 0;
   margin: 0;
-  max-height: 180px; 
-  overflow-y: auto;    
+  max-height: 180px;
+  overflow-y: auto;
   overflow-x: hidden;
   flex: 1;
   min-width: 0;
@@ -348,7 +348,7 @@ nav {
 
   /* Firefox */
   scrollbar-width: thin;
-  scrollbar-color: #d4b200 #FEED95; 
+  scrollbar-color: #d4b200 #FEED95;
 }
 
 /* Chrome, Edge, Safari */
@@ -357,24 +357,24 @@ nav {
 }
 
 #news-list::-webkit-scrollbar-track {
-  background: #FEED95;  
+  background: #FEED95;
   border-radius: 10px;
 }
 
 #news-list::-webkit-scrollbar-thumb {
-  background-color: #d4b200; 
+  background-color: #d4b200;
   border-radius: 10px;
-  border: 2px solid #FEED95; 
+  border: 2px solid #FEED95;
 }
 
 #news-list::-webkit-scrollbar-thumb:hover {
-  background-color: #b89a00; 
+  background-color: #b89a00;
 }
 
 #news-list li {
   display: block;
   padding: 6px 20px 6px 6px;
-  font-size: 1rem; 
+  font-size: 1rem;
   text-align: left;
   word-wrap: break-word;
   overflow-wrap: break-word;
@@ -423,11 +423,11 @@ nav {
   margin-left: 5px;
   vertical-align: middle;
   cursor: pointer;
-  animation: blink 1s infinite; 
+  animation: blink 1s infinite;
 }
 
 .new-badge img {
-  width: 25px;    
+  width: 25px;
   height: auto;
   vertical-align: middle;
 }
@@ -460,19 +460,28 @@ nav {
 /* CONSTRUCTION BANNER */
 .construction-banner {
   width: 100%;
+  max-width: 100%;
   background-color: #1f2f46;
   overflow: hidden;
   white-space: nowrap;
   box-sizing: border-box;
   border-radius: 4px;
+  /* Force Safari to create its own compositing/clip layer so the
+     translateX animation on the child below is reliably clipped
+     instead of occasionally leaking into the page's scrollable area
+     (this is what caused the stray horizontal "slider" in Safari). */
+  position: relative;
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+  contain: paint;
 }
 
 .construction-banner p {
   display: inline-block;
-  color: #FFD700; 
+  color: #FFD700;
   font-weight: bold;
   font-size: 10px;
-  padding-left: 100%; 
+  padding-left: 100%;
   animation: scroll-text 15s linear infinite;
 }
 
@@ -502,7 +511,7 @@ nav {
 
 #calc-para,
 #calc-para1 {
-  font-size: 1.0625rem; 
+  font-size: 1.0625rem;
   line-height: 1.8;
   color: #1f2f46;
   margin-bottom: 20px;
@@ -526,7 +535,7 @@ nav {
 #calc-heading ~ h2 {
   margin-top: 36px;
   margin-bottom: 12px;
-  font-size: 1.625rem; 
+  font-size: 1.625rem;
   color: #1f2f46;
   padding-left: 14px;
   position: relative;
@@ -588,7 +597,7 @@ nav {
   max-width: 900px;
   margin: 12px 0;
   padding-left: 20px;
-  font-size: 1.25rem; 
+  font-size: 1.25rem;
   font-weight: bold;
   color: #1f2f46;
 }
@@ -690,7 +699,7 @@ footer .footer-container a:hover::after {
 
   #updated-news h2 { margin-top: 0; }
 
-  #about, #updated-news { 
+  #about, #updated-news {
     width: 100%;
     min-width: 0;
     max-width: 100%;
@@ -918,7 +927,7 @@ footer .footer-container a:hover::after {
     /* left: 0;
     min-width: 200px; */
     position: fixed;
-    top: 48px;                 
+    top: 48px;
     left: 5vw;
     /* transform: translateX(-25%); */
     width: 90vw;
@@ -943,7 +952,7 @@ footer .footer-container a:hover::after {
   .dropdown.notes-dropdown .dropdown-content {
     right: 0;
     left: auto;
-    padding: 4px 0; 
+    padding: 4px 0;
     text-align: left;
     box-sizing: border-box;
     border-radius: 18px;
@@ -969,9 +978,11 @@ footer .footer-container a:hover::after {
   html, body {
     height: 100%;
     width: 100%;
+    max-width: 100%;
     margin: 0;
     padding: 0;
     overflow-x: hidden;
+    overscroll-behavior-x: none;
   }
 
   body {
@@ -983,17 +994,19 @@ footer .footer-container a:hover::after {
 
   .container {
     display: flex;
-    flex-direction: row; 
+    flex-direction: row;
     flex: 1;
     min-height: 0;
     width: 100%;
+    max-width: 100%;
     box-sizing: border-box;
   }
 
   .content {
     flex: 1;
-    min-width: 0; 
+    min-width: 0;
     width: 100%;
+    max-width: 100%;
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
@@ -1003,17 +1016,18 @@ footer .footer-container a:hover::after {
     display: -webkit-flex;
     display: flex;
     width: 100%;
+    max-width: 100%;
     gap: 20px;
-    align-items: stretch; 
+    align-items: stretch;
     box-sizing: border-box;
   }
 
   #about,
   #updated-news {
-    flex: 1 1 0%; 
-    min-width: 0; 
-    height: auto; 
-    max-height: none; 
+    flex: 1 1 0%;
+    min-width: 0;
+    height: auto;
+    max-height: none;
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
@@ -1037,5 +1051,4 @@ footer .footer-container a:hover::after {
     margin-top: auto;
   }
 }
-
 
