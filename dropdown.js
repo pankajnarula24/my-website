@@ -1,11 +1,14 @@
-fetch('navbar.html')
+/* ?v=9 is a cache buster — see the note in index.html. Bump the number
+   whenever you edit navbar.html or footer.html so browsers and Cloudflare
+   are forced to fetch the new version instead of a stale cached one. */
+fetch('navbar.html?v=9')
   .then(response => response.text())
   .then(data => {
     document.getElementById('navbar-placeholder').innerHTML = data;
     setupMobileDropdowns();
   });
 
-fetch('footer.html')
+fetch('footer.html?v=9')
   .then(response => response.text())
   .then(data => {
     document.getElementById('footer-placeholder').innerHTML = data;
