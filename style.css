@@ -1,4 +1,15 @@
 /* GLOBAL */
+
+/* Page-level guard against any stray horizontal scrolling.
+   'clip' is used instead of 'hidden' because 'hidden' would turn <html>
+   into a scroll container and break the sticky navbar in Safari.
+   Safari 16+ supports overflow: clip; older versions simply ignore this
+   and rely on the structural fixes below. */
+html {
+  max-width: 100%;
+  overflow-x: clip;
+}
+
 body {
   font-family: 'Times New Roman', Times, serif;
   margin: 0;
@@ -7,12 +18,20 @@ body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  max-width: 100%;
+  overflow-x: clip;
 }
 
 .container {
   display: flex;
   /* min-height: auto; */
   flex: 1;
+  /* Flex items default to min-width:auto, which lets a wide child (the
+     nowrap construction banner) force the row wider than the viewport.
+     Safari applies that rule more aggressively than Chrome, which is why
+     the stray horizontal slider only showed up there. */
+  min-width: 0;
+  max-width: 100%;
 }
 
 .sidebar {
@@ -38,6 +57,11 @@ body {
 
   display: flex;
   flex-direction: column;
+
+  /* Same reason as .container above: without this, .content refuses to
+     shrink below the intrinsic width of the nowrap banner text. */
+  min-width: 0;
+  max-width: 100%;
 }
 
 /* HEADINGS */
@@ -67,6 +91,8 @@ h1 {
   gap: 80px;
   align-items: flex-start;
   width: 100%;
+  max-width: 100%;
+  min-width: 0;
   box-sizing: border-box;
   overflow: visible;
 }
@@ -78,12 +104,27 @@ h1 {
   padding: 20px;
   border-radius: 20px;
   min-height: auto;
-  max-height: 300px;
+  /* Was max-height: 300px. Safari's Times New Roman metrics are slightly
+     taller than Chrome's, so the contact list could exceed 300px and get
+     cut off by overflow:hidden ("boxes not shown properly"). The
+     announcements list has its own 180px scroll cap, so removing this
+     changes nothing visually except that content no longer gets clipped. */
+  max-height: none;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
   min-width: 0;
+  max-width: 100%;
   overflow: hidden;
+}
+
+/* Long unbroken strings (email address, institute name) must never widen
+   the box past its column. */
+#about h3,
+#about a,
+#updated-news li {
+  overflow-wrap: break-word;
+  word-break: break-word;
 }
 
 #about {
@@ -133,6 +174,9 @@ nav {
   box-shadow: 0 3px 10px rgba(0,0,0,0.15);
   overflow: visible;
   flex-wrap: nowrap;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
 }
 
 /* MENU */
@@ -473,7 +517,11 @@ nav {
   position: relative;
   -webkit-transform: translateZ(0);
   transform: translateZ(0);
-  contain: paint;
+  /* inline-size containment stops the nowrap marquee text (which is far
+     wider than the screen, plus a 100% left padding) from contributing
+     its intrinsic width to any ancestor's layout. This is the primary
+     cause of the phantom horizontal scrollbar. */
+  contain: inline-size paint;
 }
 
 .construction-banner p {
@@ -945,6 +993,12 @@ footer .footer-container a:hover::after {
   .dropdown.courses-dropdown .dropdown-content li a {
     padding: 8px 10px;
     font-size: 0.9rem;
+    /* The desktop rule sets white-space: nowrap. On a narrow phone the
+       longest course title is wider than the 90vw panel, and the overflow
+       from this fixed-position panel is what let the page pan sideways
+       while the menu was open. Let it wrap instead. */
+    white-space: normal;
+    overflow-wrap: break-word;
   }
 
   /* NOTES */
@@ -963,6 +1017,8 @@ footer .footer-container a:hover::after {
     font-size: 0.9rem;
     text-align: left;
     margin-bottom: 0;
+    white-space: normal;
+    overflow-wrap: break-word;
   }
 
   .dropdown .dropdown-content li a:hover {
@@ -972,7 +1028,47 @@ footer .footer-container a:hover::after {
 }
 
 
-/* SAFARI ONLY FIXES */
+/* ALL SAFARI (desktop macOS + iOS) FIXES
+   Note: the block further down is gated on -webkit-touch-callout, which
+   only exists on iOS — desktop Safari never received any of those fixes.
+   -webkit-hyphens is Safari-only and works on both platforms. */
+@supports (-webkit-hyphens: none) {
+
+  html, body {
+    max-width: 100%;
+  }
+
+  .container,
+  .content,
+  .info-sections {
+    min-width: 0;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
+  #about,
+  #updated-news {
+    min-width: 0;
+    max-width: 100%;
+    max-height: none;
+    box-sizing: border-box;
+  }
+
+  .construction-banner {
+    width: 100%;
+    max-width: 100%;
+    overflow: hidden;
+  }
+
+  .news-text,
+  #news-list li {
+    word-break: break-word;
+    overflow-wrap: break-word;
+    white-space: normal;
+  }
+}
+
+/* iOS SAFARI ONLY FIXES */
 @supports (-webkit-touch-callout: none) {
 
   html, body {
