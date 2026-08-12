@@ -10,6 +10,17 @@ html {
   overflow-x: clip;
 }
 
+/* Safari only learned 'overflow: clip' in version 16. On older Safari the
+   rule above is dropped entirely, leaving no guard at all — so fall back to
+   'hidden'. This is applied to <html> rather than <body> on purpose:
+   overflow on the root propagates to the viewport, so the sticky navbar
+   keeps working. Setting it on <body> is what breaks sticky. */
+@supports not (overflow-x: clip) {
+  html {
+    overflow-x: hidden;
+  }
+}
+
 body {
   font-family: 'Times New Roman', Times, serif;
   margin: 0;
