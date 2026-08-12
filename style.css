@@ -30,7 +30,9 @@ body {
   display: flex;
   flex-direction: column;
   max-width: 100%;
-  overflow-x: clip;
+  /* Deliberately NO overflow-x here. Overflow set on <body> (rather than
+     <html>) turns body into a scroll container, which breaks the sticky
+     navbar in Safari. The guard on <html> above is the one that counts. */
 }
 
 .container {
@@ -99,6 +101,9 @@ h1 {
 .info-sections {
   display: flex;
   flex-direction: row;
+  /* Safety net: if the two boxes ever cannot fit side by side, they now
+     stack instead of pushing the page wider. */
+  flex-wrap: wrap;
   gap: 80px;
   align-items: flex-start;
   width: 100%;
@@ -552,12 +557,25 @@ nav {
   contain: paint;
 }
 
+/* THE ACTUAL BUG WAS HERE: padding-left: 100%.
+
+   WebKit resolves percentage padding against the containing block while
+   computing an element's intrinsic width — Blink and Gecko treat it as
+   zero. So in Safari this <p> measured roughly (page width + text width),
+   and that fed back into the page's scrollable area, making the document
+   about twice the viewport width. That is why the horizontal slider
+   appeared only in Safari, and only on the home page: this banner is the
+   only element on the site that uses percentage padding.
+
+   The marquee now starts the text off the right edge with a transform
+   instead. Transforms never participate in layout or intrinsic sizing, so
+   this cannot widen anything, and the animation looks identical. */
 .construction-banner p {
   position: absolute;
   top: 0;
   left: 0;
   margin: 0;
-  padding-left: 100%;
+  padding: 0;
   line-height: 32px;
   color: #FFD700;
   font-weight: bold;
@@ -568,7 +586,7 @@ nav {
 }
 
 @keyframes scroll-text {
-  0% { transform: translateX(0%); }
+  0%   { transform: translateX(100vw); }
   100% { transform: translateX(-100%); }
 }
 
@@ -896,14 +914,11 @@ footer .footer-container a:hover::after {
   animation: blink 1s infinite;
 }
 
-@keyframes scroll-text {
-  from { transform: translateX(0); }
-  to   { transform: translateX(-100%); }
-}
-
-.construction-banner p {
-  animation: scroll-text 15s linear infinite;
-}
+/* A duplicate @keyframes scroll-text and a duplicate .construction-banner p
+   rule used to sit here. Because they came later in the file they silently
+   overrode the definitions above — which is why earlier attempts to change
+   the banner animation appeared to do nothing at all. Removed so the rules
+   next to the banner are the ones that actually apply. */
 
 /* MOBILE NAVBAR */
 
@@ -1111,8 +1126,13 @@ footer .footer-container a:hover::after {
     max-width: 100%;
     margin: 0;
     padding: 0;
-    overflow-x: hidden;
     overscroll-behavior-x: none;
+  }
+
+  /* overflow-x lives on <html> only — putting it on <body> as well would
+     make body a scroll container and break the sticky navbar. */
+  html {
+    overflow-x: hidden;
   }
 
   body {
