@@ -257,7 +257,20 @@ nav {
   display: none;
   position: absolute;
   top: 110%;
-  left: 0;
+  /* Was left: 0, which made this panel grow RIGHTWARD from the Courses
+     item. The menu is right-aligned, so Courses sits only ~330px from the
+     right edge, while the panel's widest nowrap item ("Differential
+     Equations and Linear Algebra") is ~320px plus padding. That left a
+     margin of only a few pixels — and Safari renders Times New Roman
+     slightly wider than Chrome, so in Safari it tipped over the edge and
+     produced a horizontal scrollbar, but only while the menu was open.
+     That is the intermittent "slider" you were seeing.
+
+     Anchoring to the right edge instead makes the panel grow LEFTWARD,
+     into open space, so it can never reach the viewport edge. This is the
+     same approach the Notes and Ideas dropdown already uses. */
+  left: auto;
+  right: 0;
   transform: none;
   background-color: #FEED95;
   min-width: 260px;
@@ -512,35 +525,45 @@ nav {
   25%, 75% { opacity: 0; }
 }
 
-/* CONSTRUCTION BANNER */
+/* CONSTRUCTION BANNER
+   Rebuilt so the scrolling text is structurally incapable of affecting
+   page width. Previously the <p> was an in-flow inline-block, which meant
+   its enormous width (100% left padding + nowrap text) was real layout
+   that Safari could expose as scrollable area. Now the <p> is absolutely
+   positioned inside a positioned, overflow-hidden parent: out of flow, it
+   contributes nothing to any ancestor's size and is always clipped.
+
+   The previous translateZ(0) on this element has been removed on purpose —
+   promoting the parent to its own compositing layer while the child also
+   animates a transform can trigger the WebKit bug where a composited
+   layer's clip is not applied to its composited descendants. */
 .construction-banner {
+  position: relative;
   width: 100%;
   max-width: 100%;
+  /* Matches the height the in-flow <p> produced (10px font, 1em default
+     margins top and bottom) so the bar looks exactly as before. */
+  height: 32px;
   background-color: #1f2f46;
   overflow: hidden;
   white-space: nowrap;
   box-sizing: border-box;
   border-radius: 4px;
-  /* Force Safari to create its own compositing/clip layer so the
-     translateX animation on the child below is reliably clipped
-     instead of occasionally leaking into the page's scrollable area
-     (this is what caused the stray horizontal "slider" in Safari). */
-  position: relative;
-  -webkit-transform: translateZ(0);
-  transform: translateZ(0);
-  /* inline-size containment stops the nowrap marquee text (which is far
-     wider than the screen, plus a 100% left padding) from contributing
-     its intrinsic width to any ancestor's layout. This is the primary
-     cause of the phantom horizontal scrollbar. */
-  contain: inline-size paint;
+  contain: paint;
 }
 
 .construction-banner p {
-  display: inline-block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin: 0;
+  padding-left: 100%;
+  line-height: 32px;
   color: #FFD700;
   font-weight: bold;
   font-size: 10px;
-  padding-left: 100%;
+  white-space: nowrap;
+  will-change: transform;
   animation: scroll-text 15s linear infinite;
 }
 
