@@ -309,6 +309,28 @@ nav {
   display: block;
 }
 
+/* INVISIBLE HOVER BRIDGE
+   The panel sits at top:110%, so there is a small strip of dead space
+   between the "Courses" label and the panel itself. Moving the pointer
+   down into the menu crosses that strip, hover is lost, and the menu
+   closes before you can reach an item — that is the "menu disappears too
+   fast" problem.
+
+   This pseudo-element fills that strip. It has no background so nothing
+   changes visually, but because it belongs to the panel (a descendant of
+   the .dropdown item) hovering it keeps :hover active the whole way down.
+   It only exists while the panel is displayed, so it never blocks the
+   navbar when the menu is closed. */
+.dropdown.courses-dropdown .dropdown-content::before,
+.dropdown.notes-dropdown .dropdown-content::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: -16px;
+  height: 16px;
+}
+
 /* NOTES & IDEAS DROPDOWN */
 .dropdown.notes-dropdown {
   position: relative;

@@ -5,12 +5,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Pankaj Narula - Home</title>
 
-<!-- The ?v=9 on these URLs is a cache buster. Browsers and Cloudflare treat
-     "style.css?v=9" as a brand new file they have never seen, so they are
+<!-- The ?v=11 on these URLs is a cache buster. Browsers and Cloudflare treat
+     "style.css?v=11" as a brand new file they have never seen, so they are
      forced to download it instead of reusing an old cached copy. Bump the
-     number (v=10, v=11, ...) every time you change style.css or a script,
+     number (v=11, v=12, ...) every time you change style.css or dropdown.js,
      and you will never be served a stale file again. -->
-<link rel="stylesheet" href="style.css?v=9">
+<link rel="stylesheet" href="style.css?v=11">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
@@ -41,8 +41,11 @@
         <h2>Announcements</h2>
         <div class="news-container">
           <ul id="news-list">
-            <!-- dummy news  -->
-            <!-- write in this format YYYY-MM-DD -->
+            <!-- TO ADD AN ANNOUNCEMENT: copy a line below.
+                 date format YYYY-MM-DD, time format HH:MM (24 hour).
+                 data-link is optional - put a URL in it to make the item clickable.
+                 Items are sorted newest first automatically, and anything
+                 posted within the last 15 days gets the blinking New star. -->
             <li data-date="2026-08-12" data-time="06:30" data-link="">You can now access the current notes and practice sheets of Numerical Linear Algebra (UMA021) on the course page.</li>
 
             <!-- <li data-date="2026-01-28" data-time="15:40" data-link="">Sessional-1 of Calculus for Engineers (UMA022) will be held on 12/02/2026 (Thursday) at 2:00 pm </li> -->
@@ -55,8 +58,109 @@
 
 <div id="footer-placeholder"></div>
 
-<script src="announcements.js?v=9"></script>
-<script src="dropdown.js?v=9"></script>
+<!-- ANNOUNCEMENTS FORMATTING
+     This used to live in announcements.js, but that file does not exist on
+     the server - requesting it returns the home page instead, so the script
+     never ran and the date and time disappeared. Keeping the code here in
+     the page means there is no separate file to go missing or be cached. -->
+<script>
+(function () {
+  'use strict';
+
+  function renderNews() {
+    var newsList = document.getElementById('news-list');
+    if (!newsList) return;
+
+    // How long the blinking New star stays on an announcement.
+    // Change the 15 to any number of days you want.
+    var NEW_BADGE_DAYS = 15;
+    var BADGE_WINDOW = NEW_BADGE_DAYS * 24 * 60 * 60 * 1000;
+    var now = new Date();
+
+    var items = Array.prototype.slice.call(newsList.querySelectorAll('li'))
+      .map(function (item) {
+        var dateStr = item.getAttribute('data-date');
+        var timeStr = item.getAttribute('data-time') || '00:00';
+        if (!dateStr) return null;
+
+        var d = dateStr.split('-').map(Number);
+        var t = timeStr.split(':').map(Number);
+        var when = new Date(d[0], d[1] - 1, d[2], t[0] || 0, t[1] || 0);
+        if (isNaN(when.getTime())) return null;
+
+        return { element: item, date: when };
+      })
+      .filter(Boolean);
+
+    if (!items.length) return;
+
+    // Newest first
+    items.sort(function (a, b) { return b.date - a.date; });
+    newsList.innerHTML = '';
+
+    items.forEach(function (entry) {
+      var el = entry.element;
+      var date = entry.date;
+      var isRecent = now >= date && (now - date) <= BADGE_WINDOW;
+
+      var pad = function (n) { return String(n).padStart(2, '0'); };
+      var formattedDate = pad(date.getDate()) + '-' +
+                          pad(date.getMonth() + 1) + '-' +
+                          date.getFullYear();
+
+      var hours = date.getHours();
+      var minutes = pad(date.getMinutes());
+      var ampm = hours >= 12 ? 'PM' : 'AM';
+      hours = hours % 12 || 12;
+      var formattedTime = hours + ':' + minutes + ' ' + ampm;
+
+      var text = el.textContent.trim();
+      var link = (el.getAttribute('data-link') || '').trim();
+      var hasLink = !!link;
+
+      var body;
+      if (isRecent) {
+        body =
+          '<div class="news-text">' + text +
+            '<span class="new-badge' + (hasLink ? ' clickable' : '') + '">' +
+              (hasLink
+                ? '<a href="' + link + '" target="_blank" rel="noopener noreferrer">' +
+                    '<img src="star-new.png" alt="New">' +
+                  '</a>'
+                : '<img src="star-new.png" alt="New">') +
+            '</span>' +
+          '</div>';
+      } else {
+        body =
+          '<div class="news-text">' +
+            (hasLink
+              ? '<a href="' + link + '" target="_blank" rel="noopener noreferrer">' + text + '</a>'
+              : text) +
+          '</div>';
+      }
+
+      el.className = 'news-item';
+      el.innerHTML =
+        '<div class="news-header">' +
+          '<span class="news-date">' + formattedDate + '</span>' +
+          '<span class="news-time">' + formattedTime + '</span>' +
+        '</div>' + body;
+
+      newsList.appendChild(el);
+    });
+  }
+
+  // Runs whether the DOM is already parsed or not, so it works even if the
+  // host or Cloudflare changes how scripts are loaded.
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', renderNews);
+  } else {
+    renderNews();
+  }
+})();
+</script>
+
+<script src="dropdown.js?v=11"></script>
 
 </body>
 </html>

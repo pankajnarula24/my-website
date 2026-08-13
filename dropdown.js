@@ -1,14 +1,14 @@
-/* ?v=9 is a cache buster — see the note in index.html. Bump the number
+/* ?v=11 is a cache buster — see the note in index.html. Bump the number
    whenever you edit navbar.html or footer.html so browsers and Cloudflare
    are forced to fetch the new version instead of a stale cached one. */
-fetch('navbar.html?v=9')
+fetch('navbar.html?v=11')
   .then(response => response.text())
   .then(data => {
     document.getElementById('navbar-placeholder').innerHTML = data;
     setupMobileDropdowns();
   });
 
-fetch('footer.html?v=9')
+fetch('footer.html?v=11')
   .then(response => response.text())
   .then(data => {
     document.getElementById('footer-placeholder').innerHTML = data;
@@ -29,12 +29,19 @@ function setupMobileDropdowns() {
     if (!link) return;
 
     link.addEventListener('click', function(e) {
-      // Only intercept the click for the mobile tap-to-open behavior.
-      // On wider screens, hover handles the dropdown and the link's
-      // normal (no-op) click can pass through untouched.
+      // These triggers are written as <a href="">Courses</a>. An empty href
+      // means "reload the current page", so clicking Courses on a desktop
+      // used to silently reload the home page and take the open menu with
+      // it — which felt exactly like the menu closing at random. Block the
+      // navigation on every screen size; this element is a menu toggle, not
+      // a link to anywhere.
+      e.preventDefault();
+
+      // Below the mobile breakpoint the menu is tap-to-open, so also do the
+      // open/close toggling. Above it, hover already handles the menu and we
+      // only needed to stop the reload.
       if (window.innerWidth > 768) return;
 
-      e.preventDefault();
       e.stopPropagation();
 
       dropdowns.forEach(other => {
